@@ -11,7 +11,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Use Tomcat as the base image for deployment
-FROM tomcat:9.0-jdk18-openjdk-slim
+FROM tomcat:10.1-jdk18-temurin-jammy
 
 # Remove the default Tomcat applications
 RUN rm -rf /usr/local/tomcat/webapps/*
