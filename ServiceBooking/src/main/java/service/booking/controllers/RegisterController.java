@@ -1,5 +1,6 @@
 package service.booking.controllers;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ch.qos.logback.classic.Logger;
 import jakarta.validation.Valid;
 import service.booking.DAO.UserDaoImpl;
 import service.booking.Registration.UserDto;
@@ -19,6 +21,8 @@ import service.booking.servicelayer.ValidateOtp;
 
 @Controller
 public class RegisterController {
+	
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(RegisterController.class);
 	
 	@Autowired
 	private UserDaoImpl userDaoImpl;
@@ -37,6 +41,7 @@ public class RegisterController {
 	@RequestMapping("/")
 	public String getLandingPage() {
 		
+		logger.info("Accessing landing page");
 		return "landing-page";
 	}
 	
@@ -99,6 +104,8 @@ public class RegisterController {
     @RequestMapping("/test")
     @ResponseBody
     public String test() {
+    	
+    	logger.info("Accessing Test page");
         return "Test successful";
     }
 }
