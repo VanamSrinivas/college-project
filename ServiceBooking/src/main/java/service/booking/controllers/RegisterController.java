@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import service.booking.DAO.UserDaoImpl;
 import service.booking.Registration.UserDto;
 import service.booking.Registration.UserEmailDto;
+import service.booking.Registration.UserLoginDto;
 import service.booking.servicelayer.GetOtp;
 import service.booking.servicelayer.SendMessage;
 import service.booking.servicelayer.ValidateOtp;
@@ -45,7 +46,15 @@ public class RegisterController {
 	}
 	
 	@RequestMapping("/send-otp")
-	public String getRegisterPage(@ModelAttribute("userRegistration") UserDto userDto,UserEmailDto user) {
+	public String getRegisterPage(@ModelAttribute("userRegistration") UserDto userDto,UserEmailDto user,Model model) {
+		
+		UserLoginDto userLoginDto = userDaoImpl.getUserDetails(userDto.getEmail());
+		
+		if(userLoginDto!=null)
+		{
+			model.addAttribute("userExists","already registered with these email");
+			return "register";
+		}
 		
 		otp = getOtp.getOtp();
 		

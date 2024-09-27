@@ -38,17 +38,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/process-login") 
-	public String processLogin(@Valid @ModelAttribute("userLogin") UserLoginDto user,BindingResult result,HttpSession session,Model model,@RequestParam("user") String userType) {
-		
-		
+	public String processLogin(@Valid @ModelAttribute("userLogin") UserLoginDto user,BindingResult result,HttpSession session,Model model,@RequestParam("user") String userType) 
+	{
 		
 		if(result.hasErrors())
 		{
 			
 			return "login";
 		}
-		
-		System.out.println(userType);
 		
 		if(userType.equals("user"))
 		{
