@@ -10,17 +10,17 @@ COPY . .
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Use an official OpenJDK runtime as the base image
-FROM openjdk:18-jdk-slim
+# Use Tomcat as the base image for deployment
+FROM tomcat:9.0-jdk18-openjdk-slim
 
-# Set the working directory in the container
-WORKDIR /app
+# Remove the default Tomcat applications
+RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy the built WAR file from the build stage
-COPY --from=build /app/target/ServiceBooking.war app.war
+COPY --from=build /app/target/ServiceBooking.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose the port your app runs on
 EXPOSE 8080
 
-# Run the WAR file
-ENTRYPOINT ["java", "-jar", "app.war"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
