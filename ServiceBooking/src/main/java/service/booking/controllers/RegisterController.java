@@ -96,13 +96,9 @@ public class RegisterController {
 		return "registration-success";
 	}
 	
-	@Controller
-	public class TestController {
-	    @RequestMapping("/test")
-	    @ResponseBody
-	    public String test() {
-	        return "Test successful";
-	    }
-	}
-
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test() {
+        return "Test successful";
+    }
 }
