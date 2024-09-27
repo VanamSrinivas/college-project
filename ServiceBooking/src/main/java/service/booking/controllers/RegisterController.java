@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.validation.Valid;
 import service.booking.DAO.UserDaoImpl;
@@ -93,6 +94,15 @@ public class RegisterController {
 		}
 		
 		return "registration-success";
+	}
+	
+	@Controller
+	public class TestController {
+	    @RequestMapping("/test")
+	    @ResponseBody
+	    public String test() {
+	        return "Test successful";
+	    }
 	}
 
 }
